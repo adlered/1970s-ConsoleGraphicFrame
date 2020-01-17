@@ -15,15 +15,15 @@ import java.util.TreeMap;
 public class CGF70s {
     // 临时方法
     public static void run() {
-        Map<Integer, Character> chr = new TreeMap<>();
-        chr.put(2, 'h');
-        chr.put(3, 'e');
-        chr.put(4, 'l');
-        chr.put(5, 'l');
-        chr.put(6, 'o');
+
+        Map<String, String> custom = new TreeMap<>();
+        custom.put("0", "hello");
+        Map<String, String> custom2 = new TreeMap<>();
+        custom2.put("4", "world");
+
         Map<Integer, Map<Integer, Character>> map = new HashMap<>();
-        map.put(0, chr);
-        map.put(2, chr);
+        map.put(0, DataCGF.convertToLine(custom, 9));
+        map.put(2, DataCGF.convertToLine(custom2, 9));
         Print print = new Print(9, 3);
         print.submit(map);
     }

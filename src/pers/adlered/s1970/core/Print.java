@@ -13,7 +13,7 @@ import java.util.TreeMap;
  */
 public class Print {
     // 空白处默认打印字符
-    private char defaultChar = ' ';
+    private char defaultChar = '#';
     // 如每行最后一个字符串后仍有空行，是否删除剩余空行
     private boolean deleteRemaining = true;
 
@@ -40,9 +40,9 @@ public class Print {
     // 按行打印，超出宽度则忽略
     public void line(Map<Integer, Character> chr, boolean noNewLine) {
         char[] output = new char[width];
-        // 填充 output 数组中整行 >> "#"
+        // 填充 output 数组中整行
         for (int i = 0; i < width; i++) {
-            output[i] = ' ';
+            output[i] = defaultChar;
         }
         // 替换 chr 中提供的文字
         Iterator<Map.Entry<Integer, Character>> iterator = chr.entrySet().iterator();
@@ -50,7 +50,11 @@ public class Print {
             Map.Entry<Integer, Character> integerCharacterEntry = iterator.next();
             int index = integerCharacterEntry.getKey();
             Character character = integerCharacterEntry.getValue();
-            output[index] = character;
+            try {
+                output[index] = character;
+            } catch (ArrayIndexOutOfBoundsException AIOOBE) {
+                continue;
+            }
         }
         // 删除空字符
         if (deleteRemaining) {
@@ -69,6 +73,8 @@ public class Print {
                     tempNewOutput[i] = output[i];
                 }
                 output = tempNewOutput;
+            } else {
+                output = new char[0];
             }
         }
         for (char c : output) {
