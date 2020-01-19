@@ -15,7 +15,7 @@ public class Print {
     // 空白处默认打印字符
     private char defaultChar = '#';
     // 如每行最后一个字符串后仍有空行，是否删除剩余空行
-    private boolean deleteRemaining = true;
+    private boolean deleteRemaining = false;
 
     private int width;
     private int height;
@@ -33,12 +33,16 @@ public class Print {
                 aLine = new TreeMap<>();
             }
             boolean noNewLine = (i == (height - 1));
-            line(aLine, noNewLine);
+            boolean firstLine = (i == 0);
+            line(aLine, firstLine, noNewLine);
         }
     }
 
     // 按行打印，超出宽度则忽略
-    public void line(Map<Integer, Character> chr, boolean noNewLine) {
+    public void line(Map<Integer, Character> chr, boolean firstLine,boolean noNewLine) {
+        if (firstLine) {
+            System.out.println();
+        }
         char[] output = new char[width];
         // 填充 output 数组中整行
         for (int i = 0; i < width; i++) {

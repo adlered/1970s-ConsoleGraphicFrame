@@ -24,9 +24,15 @@ public class CGF70s {
         Map<Integer, Map<Integer, Character>> map = new HashMap<>();
         map.put(0, DataCGF.convertToLine(custom, 9));
         map.put(2, DataCGF.convertToLine(custom2, 9));
-        Print print = new Print(9, 3);
-        print.submit(map);
+        Print print = new Print(16, 8);
+        while (true) {
+            print.submit(map);
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException IE) {}
+        }
     }
 
     // 控制台校正功能
+
 }
